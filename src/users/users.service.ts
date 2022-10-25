@@ -49,6 +49,18 @@ export class UsersService {
     }
   }
 
+  async findOneById(id: string): Promise<User> {
+    try {
+      return await this.usersRepository.findOneByOrFail({ id });
+    } catch (error) {
+      // throw new NotFoundException(`${email} not found`);
+      this.handleDBErrors({
+        code: 'error-002',
+        detail: `${id} not found`,
+      });
+    }
+  }
+
   async block(id: string): Promise<User> {
     const newUser = new User();
     return newUser;
