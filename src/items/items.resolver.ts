@@ -22,15 +22,16 @@ export class ItemsResolver {
   }
 
   @Query(() => [Item], { name: 'items' })
-  findAll(): Promise<Item[]> {
-    return this.itemsService.findAll();
+  findAll(@CurrentUser() user: User): Promise<Item[]> {
+    return this.itemsService.findAll(user);
   }
 
   @Query(() => Item, { name: 'item' })
   findOne(
     @Args('id', { type: () => ID }, ParseUUIDPipe) id: string,
+    @CurrentUser() user: User,
   ): Promise<Item> {
-    return this.itemsService.findOne(id);
+    return this.itemsService.findOne(id, user);
   }
 
   @Mutation(() => Item)
@@ -43,7 +44,8 @@ export class ItemsResolver {
   @Mutation(() => Item)
   removeItem(
     @Args('id', { type: () => ID }, ParseUUIDPipe) id: string,
+    @CurrentUser() user: User,
   ): Promise<Item> {
-    return this.itemsService.remove(id);
+    return this.itemsService.remove(id, user);
   }
 }
