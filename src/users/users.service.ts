@@ -12,6 +12,7 @@ import * as bcrypt from 'bcrypt';
 import { SignupInput } from 'src/auth/dto';
 import { User } from './entities/user.entity';
 import { ValidRoles } from 'src/auth/enums';
+import { UpdateUserInput } from './dto/inputs';
 
 @Injectable()
 export class UsersService {
@@ -68,6 +69,23 @@ export class UsersService {
         code: 'error-002',
         detail: `${id} not found`,
       });
+    }
+  }
+
+  async update(
+    id: string,
+    updateUserInput: UpdateUserInput,
+    updateBy: User,
+  ): Promise<User> {
+    try {
+      const user = await this.usersRepository.preload({
+        ...updateUserInput,
+        id,
+      });
+      user.lastUpdateBy = updateBy;
+      return await this.usersRepository.save(user);
+    } catch (error) {
+      this.handleDBErrors(error);
     }
   }
 
