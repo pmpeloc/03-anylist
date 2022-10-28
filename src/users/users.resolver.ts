@@ -101,6 +101,6 @@ export class UsersResolver {
     @Args() paginationArgs: PaginationArgs,
     @Args() searchArgs: SearchArgs,
   ): Promise<List[]> {
-    return this.itemsService.findAll(user, paginationArgs, searchArgs);
+    return this.listsService.findAll(user, paginationArgs, searchArgs);
   }
 }
