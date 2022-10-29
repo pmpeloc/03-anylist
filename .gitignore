@@ -3,6 +3,7 @@ postgres
 
 # ENV
 .env
+.env.prod
 
 # compiled output
 /dist
