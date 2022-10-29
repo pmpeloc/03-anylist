@@ -33,3 +33,15 @@ localhost:3000/graphql
 ```
 
 7. Ejecutar la mutation "executeSeed", para llenar la base de datos con información
+
+8. Subir cambios a Docker
+
+```
+docker push pmpeloc/nest-graphql-prod:1.0.0  (reemplazar por la versión requerida)
+```
+
+9. Correr la imagen Docker
+
+```
+docker run -p 3200:4000 --env-file=.env.prod pmpeloc/nest-graphql-prod:1.0.0
+```
