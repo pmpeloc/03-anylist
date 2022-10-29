@@ -121,14 +121,14 @@ input UpdateListInput {
 }
 
 input CreateListItemInput {
-  quantity: Float = 10
+  quantity: Float = 0
   completed: Boolean = false
   listId: ID!
   itemId: ID!
 }
 
 input UpdateListItemInput {
-  quantity: Float = 10
+  quantity: Float = 0
   completed: Boolean = false
   listId: ID
   itemId: ID

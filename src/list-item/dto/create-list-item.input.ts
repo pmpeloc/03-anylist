@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { InputType, Field, ID } from '@nestjs/graphql';
 import { IsBoolean, IsNumber, IsOptional, IsUUID, Min } from 'class-validator';
 
@@ -7,12 +8,12 @@ export class CreateListItemInput {
   @IsNumber()
   @Min(0)
   @IsOptional()
-  quantity = 10;
+  quantity: number = 0;
 
   @Field(() => Boolean, { nullable: true })
   @IsBoolean()
   @IsOptional()
-  completed = false;
+  completed: boolean = false;
 
   @Field(() => ID)
   @IsUUID()
